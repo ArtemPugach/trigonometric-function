@@ -24,4 +24,10 @@ jobs:
     - name: Build program
       run: |
         make
+        autoreconf --force --install
+        ./configure
+        make
 
+    - name: Run tests
+      run: |
+        make check
