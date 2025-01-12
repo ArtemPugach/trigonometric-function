@@ -2,9 +2,8 @@
 #include "FuncA.h"
 
 int main() {
-    FuncA func;  // Створення об'єкта
-    int n = 5;  // Кількість членів ряду
-    std::cout << "Result: " << func.FuncA(1.0, n) << std::endl;  // Виклик функції з параметром n
+    FuncA func; // Using default constructor
+    int n = 5; // Number of terms for calculation
+    std::cout << "Result: " << func.calculate(1.0, n) << std::endl; // Calling the method for calculation
     return 0;
 }
-
