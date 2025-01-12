@@ -3,8 +3,8 @@
 
 class FuncA {
 public:
-    double FuncA(double x); // Оголошення функції
+    FuncA(); 
+    double calculate(double x, int n);
 };
 
 #endif
-

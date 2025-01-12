@@ -1,14 +1,12 @@
 #include "FuncA.h"
-#include <cmath>  
+#include <cmath>
 
+FuncA::FuncA() {} 
 
-double FuncA::FuncA(double x) {
-    double result = 0;  // Ініціалізуємо змінну для зберігання результату
-    // Обчислюємо суму перших 3 елементів
-    for (int i = 0; i < 3; ++i) {
-        // Додаємо до результату поточний елемент послідовності
+double FuncA::calculate(double x, int n) {
+    double result = 0;
+    for (int i = 0; i < n; ++i) {
         result += std::pow(-1, i) * std::pow(x, 2 * i + 1) / (2 * i + 1);
     }
-    return result;  // Повертаємо обчислений результат
+    return result;
 }
-
