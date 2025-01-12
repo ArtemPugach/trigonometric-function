@@ -7,11 +7,13 @@ TARGET = program
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-    $(CXX) $(OBJECTS) -o $(TARGET)
+	$(CXX) $(OBJECTS) -o $(TARGET)
 
 %.o: %.cpp
-    $(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS) $(TARGET)
+check: $(TARGET)
+	./program
 
