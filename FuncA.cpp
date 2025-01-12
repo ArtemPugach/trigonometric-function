@@ -1,12 +1,11 @@
-#include "FuncA.h"
-#include <cmath>
+#ifndef FUNC_A_H
+#define FUNC_A_H
 
-FuncA::FuncA() {} // Default constructor definition
+class FuncA {
+public:
+    FuncA();  // Default constructor
+    double calculate(double x, int n);  // Method for calculating the sum of the first n terms of the series
+};
 
-double FuncA::calculate(double x, int n) {
-    double result = 0;
-    for (int i = 0; i < n; ++i) {
-        result += std::pow(-1, i) * std::pow(x, 2 * i + 1) / (2 * i + 1);
-    }
-    return result;
-}
+#endif
+
