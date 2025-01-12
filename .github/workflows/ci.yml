@@ -1,0 +1,27 @@
+name: C++ Build and Test
+
+on:
+  push:
+    branches:
+      - master
+      - branchMake
+  pull_request:
+    branches:
+      - master
+      - branchMake
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up C++ environment
+      uses: actions/setup-cpp@v1
+
+    - name: Build program
+      run: |
+        make
+
