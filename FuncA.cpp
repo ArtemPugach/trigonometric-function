@@ -1,5 +1,9 @@
-
+#include "FuncA.h"
 #include <cmath>
+
+FuncA::FuncA() {
+    // Конструктор можна залишити порожнім
+}
 
 double FuncA::FuncA(double x, int n) {
     double result = 0;
