@@ -3,8 +3,7 @@
 
 class FuncA {
 public:
-	FuncA();  
-	double FuncA(double x, int n);  // Оголошення методу для обчислення
+    double FuncA(double x, int n);  // Оголошення методу
 };
 
 #endif
