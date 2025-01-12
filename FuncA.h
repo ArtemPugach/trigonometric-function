@@ -3,8 +3,8 @@
 
 class FuncA {
 public:
-    FuncA();  // Конструктор без параметрів
-    double FuncA(double x, int n);  // Оголошення функції
+	FuncA();  
+	double FuncA(double x, int n);  // Оголошення методу для обчислення
 };
 
 #endif
