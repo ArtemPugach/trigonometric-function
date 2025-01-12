@@ -3,7 +3,8 @@
 
 int main() {
     FuncA func;
-    std::cout << "Result: " << func.FuncA(1.0) << std::endl;  // Виклик функції
+    int n = 5; 
+    std::cout << "Result: " << func.FuncA(1.0, n) << std::endl;  // Виклик функції з параметром n
     return 0;
 }
 
