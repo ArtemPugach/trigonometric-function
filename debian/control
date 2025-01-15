@@ -1,0 +1,12 @@
+Source: trigonometric-function
+Section: utils
+Priority: optional
+Maintainer: Artem Pugach  <pugacartem106@gmail.com>
+Build-Depends: debhelper (>= 11), g++ 
+Standards-Version: 4.5.0
+
+Package: trigonometric-function
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Trigonometric function calculator
+

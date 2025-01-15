@@ -1,0 +1,8 @@
+Package: trigonometric-function
+Version: 1.0
+Architecture: amd64
+Maintainer: Artem Pugach  <pugacartem106@gmail.com>
+Installed-Size: 7
+Section: utils
+Priority: optional
+Description: Trigonometric function calculator
