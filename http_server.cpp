@@ -1,4 +1,3 @@
-#include <iostream>
 #include <httplib.h>
 #include <cmath>
 #include "FuncA.h"  // Включаємо клас для обчислення тригонометричних функцій
@@ -12,12 +11,12 @@ int main() {
     svr.Get("/", [](const httplib::Request& req, httplib::Response& res) {
         // Створюємо масив для обчислення значень функцій
         FuncA func;
-        int n = 1000;  // Розмір масиву
+        int n = 70000;  // Розмір масиву
         std::vector<double> results;
-        
+
         // Обчислюємо значення для масиву
         for (int i = 0; i < n; ++i) {
-            results.push_back(func.FuncA(1.0, i + 1));  // Викликаємо функцію
+            results.push_back(func.calculate(1.0, i + 1));  // Викликаємо метод calculate
         }
 
         // Починаємо вимір часу сортування
@@ -33,4 +32,3 @@ int main() {
     svr.listen("localhost", 8080);  // Запускаємо сервер на localhost:8080
     return 0;
 }
-
