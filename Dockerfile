@@ -7,15 +7,15 @@ RUN apk add --no-cache \
     make \
     cmake \
     boost-dev \
-    git \
-    aarch64-linux-gnu-g++
+    git
 
 # Clone the public GitHub repository
 WORKDIR /app
 RUN git clone https://github.com/ArtemPugach/trigonometric-function.git .
 
 # Build the application using Makefile
-RUN make ARCH=$(uname -m)
+ARG TARGETARCH
+RUN make ARCH=${TARGETARCH}
 
 # Final stage for the runtime image
 FROM alpine:3.18

@@ -1,32 +1,29 @@
-# Змінна для архітектури, за замовчуванням - поточна система
-ARCH ?= $(shell uname -m)
-
-# Вибір компілятора залежно від архітектури
+# Compiler
 CXX = g++
-ifeq ($(ARCH), aarch64)
+ifeq ($(ARCH), arm64)
     CXX = aarch64-linux-gnu-g++
 endif
 
-# Флаги компілятора
+# Compiler flags
 CXXFLAGS = -Wall -std=c++17
 
-# Файли проекту
+# Source files
 SOURCES = FuncA.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 TARGET = program
 
-# Головна ціль
+# Main target
 all: $(TARGET)
 
-# Правило для створення виконуваного файлу
+# Linking executable
 $(TARGET): $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $(TARGET)
 
-# Правило для створення об'єктних файлів
+# Compiling object files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Очищення
+# Cleaning up
 clean:
 	rm -f $(OBJECTS) $(TARGET)
 
