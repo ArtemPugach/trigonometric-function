@@ -6,6 +6,7 @@ RUN apk add --no-cache \
     g++ \
     make \
     cmake \
+    libstdc++ \
     boost-dev \
     git
 
@@ -13,13 +14,7 @@ RUN apk add --no-cache \
 WORKDIR /app
 RUN git clone https://github.com/ArtemPugach/trigonometric-function.git .
 
-# Move into the cloned repository directory where the Makefile is located
-WORKDIR /app/trigonometric-function
-
-# Ensure Makefile is visible and remove old build artifacts
-RUN ls -l && find . -type f -name '*.o' -delete && rm -f program
-
-# Build the application using Makefile
+# Build the application
 ARG TARGETARCH
 RUN make ARCH=${TARGETARCH}
 
@@ -30,10 +25,11 @@ FROM alpine:3.18
 WORKDIR /app
 
 # Copy the executable from the builder stage
-COPY --from=builder /app/trigonometric-function/program /usr/local/bin/
+COPY --from=builder /app/program /usr/local/bin/
 
 # Expose the server port (optional)
 EXPOSE 8080
 
 # Set the entrypoint to run the program
 ENTRYPOINT ["program"]
+
