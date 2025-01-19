@@ -1,7 +1,7 @@
-# Temporary stage for building the application
+# Вибір базового образу
 FROM alpine:3.18 AS builder
 
-# Install build dependencies
+# Встановлення необхідних інструментів для збірки
 RUN apk add --no-cache \
     g++ \
     make \
@@ -10,33 +10,23 @@ RUN apk add --no-cache \
     boost-dev \
     git
 
-# Set working directory
+# Копіювання файлів у контейнер
 WORKDIR /app
+COPY . /app
 
-# Clone the repository
-RUN git clone https://github.com/ArtemPugach/trigonometric-function.git .
-
-# Ensure Makefile is in the correct directory
-RUN ls -la /app
-
-# Clean up old files (збереження Makefile)
+# Видалення попередніх зібраних файлів, якщо такі є
 RUN find . -name '*.o' -delete && rm -f ./program
 
-# Build the application using Makefile from the correct directory
-RUN make -f /app/Makefile
+# Збирання програми
+RUN make
 
-# Final stage for the runtime image
+# Створення фінального образу
 FROM alpine:3.18
 
-# Set working directory
+# Копіювання зібраної програми з попереднього етапу
 WORKDIR /app
+COPY --from=builder /app/program /app/
 
-# Copy the executable from the builder stage
-COPY --from=builder /app/program /usr/local/bin/
-
-# Expose the server port (optional)
-EXPOSE 8080
-
-# Set the entrypoint to run the program
-ENTRYPOINT ["program"]
+# Вказівка на основну команду для запуску програми
+CMD ["./program"]
 
