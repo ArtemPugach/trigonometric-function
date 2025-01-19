@@ -1,14 +1,11 @@
 # Compiler
 CXX = g++
-ifeq ($(ARCH), arm64)
-	CXX = aarch64-linux-gnu-g++
-endif
 
 # Compiler flags
-CXXFLAGS = -Wall -std=c++17
+CXXFLAGS = -Wall -std=c++17 -I./cpp-httplib
 
 # Source files
-SOURCES = FuncA.cpp main.cpp
+SOURCES = http_server.cpp FuncA.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 TARGET = program
 

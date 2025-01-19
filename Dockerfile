@@ -22,24 +22,26 @@ RUN find . -name '*.o' -delete && rm -f ./program
 # Білд програми
 RUN make
 
-# Додання прав на виконання для програмного файлу
-RUN chmod +x ./program
-
 # Фінальний етап
 FROM alpine:3.18
 
 # Встановлення бібліотек, потрібних для виконання програми
-RUN apk add --no-cache libstdc++
+RUN apk add --no-cache libstdc++ musl musl-dev && \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk && \
+    apk add --force-overwrite glibc-2.34-r0.apk && \
+    rm -f glibc-2.34-r0.apk
+
 
 # Робоча директорія
 WORKDIR /app
 
 # Копіювання виконуваного файлу з етапу зборки
-COPY --from=builder /app/program /usr/local/bin/
+COPY --from=builder /app/program /app/
 
-# Відкриття порту (опціонально)
+# Відкриття порту
 EXPOSE 8080
 
 # Запуск програми
-ENTRYPOINT ["program"]
+ENTRYPOINT ["./program"]
 
