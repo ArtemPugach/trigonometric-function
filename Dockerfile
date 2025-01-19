@@ -1,24 +1,34 @@
-# Вибір базового образу
-FROM ubuntu:latest
+# Temporary stage for building the application
+FROM alpine:3.18 AS builder
 
-# Встановлення необхідних бібліотек та інструментів
-RUN apt-get update && apt-get install -y \
+# Install build dependencies
+RUN apk add --no-cache \
     g++ \
     make \
     cmake \
-    libboost-all-dev \
+    boost-dev \
     git \
-    curl
+    aarch64-linux-gnu-g++
 
-# Копіюємо файли в контейнер
-COPY . /app
+# Clone the public GitHub repository
+WORKDIR /app
+RUN git clone https://github.com/ArtemPugach/trigonometric-function.git .
 
-# Встановлюємо робочу директорію
+# Build the application using Makefile
+RUN make ARCH=$(uname -m)
+
+# Final stage for the runtime image
+FROM alpine:3.18
+
+# Set the working directory
 WORKDIR /app
 
-# Складання програми
-RUN make
+# Copy the executable from the builder stage
+COPY --from=builder /app/program /usr/local/bin/
 
-# Запуск сервера
-CMD while true; do ./program; sleep 1; done
+# Expose the server port (optional)
+EXPOSE 8080
+
+# Set the entrypoint to run the program
+ENTRYPOINT ["program"]
 

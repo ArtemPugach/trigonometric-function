@@ -8,7 +8,7 @@ ifeq ($(ARCH), aarch64)
 endif
 
 # Флаги компілятора
-CXXFLAGS = -Wall -std=c++11
+CXXFLAGS = -Wall -std=c++17
 
 # Файли проекту
 SOURCES = FuncA.cpp main.cpp
@@ -29,8 +29,4 @@ $(TARGET): $(OBJECTS)
 # Очищення
 clean:
 	rm -f $(OBJECTS) $(TARGET)
-
-# Перевірка виконання
-check: $(TARGET)
-	./program
 
