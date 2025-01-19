@@ -1,7 +1,7 @@
 # Compiler
 CXX = g++
 ifeq ($(ARCH), arm64)
-    CXX = aarch64-linux-gnu-g++
+	CXX = aarch64-linux-gnu-g++
 endif
 
 # Compiler flags
