@@ -29,6 +29,6 @@ int main() {
         res.set_content("Elapsed time: " + std::to_string(elapsed.count()) + " seconds", "text/plain");
     });
 
-    svr.listen("localhost", 8080);  // Запускаємо сервер на localhost:8080
+    svr.listen("0.0.0.0", 8080);  // Запускаємо сервер на localhost:8080
     return 0;
 }

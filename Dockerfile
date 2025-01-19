@@ -22,6 +22,9 @@ RUN find . -name '*.o' -delete && rm -f ./program
 # Білд програми
 RUN make
 
+# Додання прав на виконання для програмного файлу
+RUN chmod +x ./program
+
 # Фінальний етап
 FROM alpine:3.18
 
