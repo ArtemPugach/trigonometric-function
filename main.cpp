@@ -1,10 +1,20 @@
 #include <iostream>
 #include "FuncA.h"
 
+int CreateHTTPserver();
+
 int main() {
-    FuncA func;  // Using default constructor
-    int n = 5;  // Number of terms for calculation
-    std::cout << "Result: " << func.calculate(1.0, n) << std::endl;  // Calling the method for calculation
-    return 0;
+    std::cout << "Starting HTTP Server..." << std::endl;
+
+    int result = CreateHTTPserver();
+
+    if (result == 0) {
+        std::cout << "Server terminated successfully." << std::endl;
+    }
+    else {
+        std::cerr << "Server encountered an error!" << std::endl;
+    }
+
+    return result;
 }
 
